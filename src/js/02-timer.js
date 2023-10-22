@@ -62,7 +62,6 @@ function timerStart() {
     timerHours.textContent = arrValue[1];
     timerMinutes.textContent = arrValue[2];
     timerSeconds.textContent = arrValue[3];
-    console.log(chosenDates - Date.now() <= 0);
   }, 1000);
 }
 
