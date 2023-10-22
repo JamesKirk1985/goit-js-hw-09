@@ -52,7 +52,6 @@ function timerStart() {
     let time = chosenDates - Date.now();
     if (time < 1000) {
       clearInterval(interval);
-      console.log('hello');
     }
     convertMs(time);
     const arrValue = Object.values(valueForTimer).map(elem =>
