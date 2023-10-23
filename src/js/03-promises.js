@@ -3,12 +3,12 @@ form.addEventListener('submit', clickHandler);
 
 function clickHandler(event) {
   event.preventDefault();
-  delay = form.elements.delay.value;
-  step = form.elements.step.value;
-  amount = form.elements.amount.value;
+  let delayStart = form.elements.delay.value;
+  let step = form.elements.step.value;
+  let amount = form.elements.amount.value;
   for (let i = 1; i <= amount; i += 1) {
-    position = i;
-    delay = Number(delay) + i * step;
+    let position = i;
+    let delay = Number(delayStart) + (i - 1) * step;
     createPromise(position, delay);
   }
 }
@@ -25,8 +25,7 @@ function createPromise(position, delay) {
         reject({ position, delay });
       }
     }, delay);
-  });
-  promise
+  })
     .then(({ position, delay }) => {
       console.log(`✅ Fulfilled promise ${position} in ${delay}ms`);
     })
