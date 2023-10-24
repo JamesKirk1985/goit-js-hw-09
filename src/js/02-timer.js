@@ -10,6 +10,7 @@ const timerSeconds = document.querySelector('[data-seconds]');
 let valueForTimer = {};
 let interval = null;
 let chosenDates = 0;
+let arrValue = 0;
 
 start.disabled = true;
 
@@ -23,6 +24,7 @@ const options = {
   onClose(selectedDates) {
     if (selectedDates[0].getTime() < Date.now()) {
       alert('Please choose a date in the future');
+      start.disabled = true;
     } else {
       start.disabled = false;
       chosenDates = selectedDates[0].getTime();
@@ -54,14 +56,19 @@ function timerStart() {
       clearInterval(interval);
     }
     convertMs(time);
-    const arrValue = Object.values(valueForTimer).map(elem =>
-      elem.toString().padStart(2, '0')
-    );
-    timerDays.textContent = arrValue[0];
-    timerHours.textContent = arrValue[1];
-    timerMinutes.textContent = arrValue[2];
-    timerSeconds.textContent = arrValue[3];
+    valueForTimerToArray();
+    setValue(arrValue);
   }, 1000);
 }
-
+function valueForTimerToArray() {
+  arrValue = Object.values(valueForTimer).map(elem =>
+    elem.toString().padStart(2, '0')
+  );
+}
+function setValue(arrValue) {
+  timerDays.textContent = arrValue[0];
+  timerHours.textContent = arrValue[1];
+  timerMinutes.textContent = arrValue[2];
+  timerSeconds.textContent = arrValue[3];
+}
 flatpickr('#datetime-picker', options);
